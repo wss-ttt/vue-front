@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100%;
+    font-size:14px;
+}
+
+ul,
+li {
+    list-style: none;
+}
+.el-card {
+    border: 0;
+    position: relative;
+}
+
+
+
+.site-wrapper {
+    height: 100%;
+    .site-content__wrapper {
+        height: 100%;
+        main {
+            height: 100%;
+            .el-tabs--top {
+                height: 100%;
+                .el-tabs__content {
+                    height: 100%;
+                    .el-tab-pane {
+                        height: 100%;
+                        .el-card {
+                            height: 100%;
+                            .el-card__body {
+                                overflow-y: auto;
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 功能页面
+.common {
+    .title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        height: 30px;
+    }
+    .bg-btn{
+        background-color: #169189;
+        color:#fff;
+        border-radius:4px;
+        border:none;
+        outline: none;
+        height:35px;
+        line-height: 34px;
+        text-align: center;
+        padding:0 15px;
+        cursor: pointer;
+        transition: all .3s;
+        &:hover{
+            background-color: #0b766f;
+        }
+    }
+    .disabled {
+        background-color: #A1A6A6;
+        pointer-events: none;
+    }
+    .query-area {
+        padding: 15px 0;
+        ul {
+            overflow: hidden;
+            li {
+            float: left;
+            margin-right: 15px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            }
+        }
+    }
+}
+/*隐藏首页tab标签的关闭图标*/
+.el-tabs__nav .el-tabs__item#tab-index span{
+    display: none;
+}
+
+// 弹出框的换行
+.el-message-box__wrapper{
+    .el-message-box{
+        .el-message-box__content{
+            .el-message-box__message{
+                p{
+                    word-wrap:break-word;
+                }
+            }
+        }
+    }
+}
+
+.el-popover{
+  max-height: 500px;
+  overflow: auto;
+}
+
+
+/*el-table样式设置*/
+body .el-table th.gutter{
+    display: table-cell!important;
+}
+
+// el-table 固定列高度问题
+.el-table__fixed-right {
+    height: 100% !important; //设置高优先，以覆盖内联样式
+}
+
+
+//滚动条的宽度
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+  //滚动条的滑块
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
