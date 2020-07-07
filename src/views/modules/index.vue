@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper">
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form :model="dataForm" status-icon :rules="rules" ref="dataForm" label-width="100px">
       <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        <el-input type="password" v-model="dataForm.pass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+        <el-input type="password" v-model="dataForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm('dataForm')">提交</el-button>
+        <el-button @click="resetForm('dataForm')">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -19,10 +19,14 @@
     data() {
       var validatePass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入密码'));
+          callback(new Error('请输入密码'))
+        } else if (value.length < 6) {
+          callback(new Error('密码不能小于6位'))
+        } else if (!/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){6,19}$/.test(value)) { // 注意这个地方的正则表达式
+          callback(new Error('只能输入6-20个以字母开头、可带数字、“_”、“.”的字串'))
         } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
+          if (this.dataForm.checkPass !== '') {
+            this.$refs.dataForm.validateField('checkPass');
           }
           callback();
         }
@@ -30,17 +34,16 @@
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm.pass) {
+        } else if (value !== this.dataForm.pass) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
         }
-      };
+      }
       return {
-        ruleForm: {
-          pass: '',
-          checkPass: '',
-          age: ''
+        dataForm: {
+          pass: '', // 密码
+          checkPass: '' // 确认密码
         },
         rules: {
           pass: [{
@@ -73,6 +76,5 @@
 
 </script>
 <style scoped lang="scss">
-  .wrapper {}
 
 </style>
