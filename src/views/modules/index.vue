@@ -1,80 +1,70 @@
 <template>
   <div class="wrapper">
-    <el-form :model="dataForm" status-icon :rules="rules" ref="dataForm" label-width="100px">
-      <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="dataForm.pass" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="确认密码" prop="checkPass">
-        <el-input type="password" v-model="dataForm.checkPass" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('dataForm')">提交</el-button>
-        <el-button @click="resetForm('dataForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+    <el-upload action="" :on-change="change"
+      :http-request="upload" :show-file-list="false">
+      <el-button size="small" type="primary">点击上传</el-button>
+    </el-upload>
+    <button type="button" @click="show">确定</button>
+    <hr>
+    <input type="file" @change="change2" />
   </div>
 </template>
+
 <script>
   export default {
+    components: {},
+    props: {},
     data() {
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'))
-        } else if (value.length < 6) {
-          callback(new Error('密码不能小于6位'))
-        } else if (!/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){6,19}$/.test(value)) { // 注意这个地方的正则表达式
-          callback(new Error('只能输入6-20个以字母开头、可带数字、“_”、“.”的字串'))
-        } else {
-          if (this.dataForm.checkPass !== '') {
-            this.$refs.dataForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.dataForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      }
       return {
-        dataForm: {
-          pass: '', // 密码
-          checkPass: '' // 确认密码
-        },
-        rules: {
-          pass: [{
-            validator: validatePass,
-            trigger: 'blur'
-          }],
-          checkPass: [{
-            validator: validatePass2,
-            trigger: 'blur'
-          }]
-        }
-      };
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+        /* fileList: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }] */
+        fileList: [] //  action="https://jsonplaceholder.typicode.com/posts/"
       }
-    }
+    },
+    computed: {},
+    watch: {},
+    created() {},
+    mounted() {},
+    activated() {},
+    deactivated() {},
+    updated() {},
+    destroyed() {},
+    methods: {
+      handleRemove(file, fileList) {
+        console.log('已经移除了')
+        console.log(file, fileList);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      beforeRemove(file, fileList) {
+        console.log('移除文件')
+        return this.$confirm(`确定移除 ${ file.name }？`);
+      },
+      // 改变事件
+      change(file, fileList) {
+        this.$message.error('超出限制')
+        console.log('change file', file)
+        console.log('change fileLise', fileList)
+      },
+      change2(file) {
+        console.log('change2', file)
+      },
+      upload() {
+        console.log('upload')
+      },
+      show() {
+        console.log(this.fileList)
+      }
+    },
+    filters: {}
   }
 
 </script>
-<style scoped lang="scss">
-
+<style scoped>
 </style>
