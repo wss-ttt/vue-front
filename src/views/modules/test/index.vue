@@ -1,73 +1,67 @@
 <template>
   <div class="wrapper">
-    <el-form :model="dataForm" status-icon :rules="rules" ref="dataForm" label-width="100px">
-      <el-form-item label="密码">
-        <el-input-number v-model="dataForm.num" :precision="3" :step="0.1"></el-input-number>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('dataForm')">提交</el-button>
-        <el-button @click="resetForm('dataForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
-    <button type="button" @click="show">ok</button>
+    <input type="text" v-model="num" />
+    <button type="button" @click="test">确定</button>
   </div>
 </template>
 
 <script>
-  export default {
-    components: {},
-    props: {},
-    data() {
-      const vm = this
-      const validateNum = (rule, value, callback) => {
-        debugger
-        if (!vm.isNumber(value)) {
-          callback(new Error('必须为一个数字'))
-        } else {
-          callback()
-        }
+export default {
+  components: {},
+  props: {},
+  data() {
+    return {
+      num: 0
+    }
+  },
+  computed: {},
+  watch: {},
+  created() {},
+  mounted() {},
+  activated() {},
+  deactivated() {},
+  updated() {},
+  destroyed() {},
+  methods: {
+    test() {
+      // console.log(typeof this.num)
+      // console.log(this.isNumber(this.num))
+      console.log(this._isNumber(this.num))
+      console.log(this.isInteger(this.num))
+    },
+    isNumber(num) {
+      // isNaN()函数 把空串 空格 以及null 按照0来处理 所以先去除，
+      if (num === '' || num == null) {
+        return false
       }
-      return {
-        dataForm: {
-          num: 0
-        },
-        rules: {
-          num: [{
-            validator: validateNum,
-            trigger: 'blur'
-          }]
-        }
+      if ((typeof num === 'number' || typeof num === 'string') && !isNaN(num)) {
+        return true
+      } else {
+        return false
       }
     },
-    computed: {},
-    watch: {},
-    created() {},
-    mounted() {},
-    activated() {},
-    deactivated() {},
-    updated() {},
-    destroyed() {},
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            console.log('submit', this.dataForm.num)
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      show() {
-        console.log(this.dataForm.num)
-      },
-      isNumber(num) {
-        return typeof num === 'number' && !isNaN(num)
+    _isNumber(num) {
+      if (parseFloat(num).toString() === 'NaN') {
+        return false
+      } else {
+        return true
       }
     },
-    filters: {}
-  }
-
+    // 判断是否为一个整数
+    isInteger(num) {
+      const val = parseInt(num)
+      if (num == val) {
+        return true
+      } else {
+        return false
+      }
+    },
+    _isInteger(num) {
+      return (typeof num === 'string' || typeof num === 'number') && num % 1 === 0
+    }
+  },
+  filters: {}
+}
 </script>
 <style scoped>
 </style>
