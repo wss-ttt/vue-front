@@ -76,6 +76,9 @@ export default {
             this.myChart.resize()
           }
         })
+
+        // 注意这个地方不能使用window.onresize进行绑定事件,如果存在多个该图表组件,就只能绑定一个回调函数,
+        // 后面的会覆盖掉前面的回调函数
       } else {
         // 4.没有数据的情况
         this.oBox.removeAttribute('_echarts_instance_')
