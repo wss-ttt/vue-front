@@ -7,10 +7,11 @@ import echarts from 'echarts'
 import uuidv1 from 'uuid/v1'
 import echartsSettings from '@/echarts-settings'
 const { loading } = echartsSettings
-import resize from './mixins/resize'
+// import resize from './mixins/resize' // 可以用这个文件
+import resize from './mixins/index' // 也可以用这个文件
 export default {
   components: {},
-  mixins: [resize],
+  mixins: [resize], // 这个地方进行混入
   props: {
     width: {
       type: String,
@@ -45,9 +46,6 @@ export default {
     this.myChart = echarts.init(this.oBox)
   },
   activated() {
-    window.addEventListener('resize', () => {
-      this.myChart.resize()
-    })
   },
   deactivated() {},
   updated() {},
