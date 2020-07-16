@@ -3,26 +3,26 @@ export default {
   mixins: [mixins],
   computed: {
     sidebarFold: {
-      get() {
+      get () {
         return this.$store.state.common.sidebarFold
       }
     }
   },
-  activated() {
+  activated () {
     this.resize()
   },
-  deactivated() {
+  deactivated () {
 
   },
   methods: {
-    resize() {
+    resize () {
       const { myChart } = this // 对象解构
       myChart && myChart.resize()
     }
   },
   watch: {
     sidebarFold: {
-      handler(newVal, oldVal) {
+      handler (newVal, oldVal) {
         if (this.activatedFlag) {
           this.resize()
         }
