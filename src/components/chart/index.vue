@@ -72,9 +72,13 @@ export default {
         this.myChart.setOption(option)
         // 3.图表自适应
         window.addEventListener('resize', () => {
-          if (this.myChart) {
-            this.myChart.resize()
-          }
+          // 这个代码不严谨，必须还得加一层判断，只有当前页面是激活的，
+          // 如果触发了resize事件，才去执行它的回调函数
+          // 如果当前页面不是激活的，不执行它的回调函数
+          // this.myChart && this.myChart.resize()
+
+          // 所以这个地方还需要this.activatedFlag进行判断一次
+          this.activatedFlag && this.myChart && this.myChart.resize()
         })
 
         // 注意这个地方不能使用window.onresize进行绑定事件,如果存在多个该图表组件,就只能绑定一个回调函数,
