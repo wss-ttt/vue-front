@@ -53,8 +53,11 @@ export default {
     if (!this.myChart) {
       return
     }
+    // 1.销毁echarts实例对象
     this.myChart.dispose()
     this.myChart = null
+    // 2.移除resize事件(因为这个事件是全局的)
+    window.removeEventListener('resize', this.chartResize) 
   },
   methods: {
     initChart(option) {
@@ -71,7 +74,7 @@ export default {
         // 2.初始化数 显示图表
         this.myChart.setOption(option)
         // 3.图表自适应
-        window.addEventListener('resize', () => {
+        /* window.addEventListener('resize', () => {
           // 这个代码不严谨，必须还得加一层判断，只有当前页面是激活的，
           // 如果触发了resize事件，才去执行它的回调函数
           // 如果当前页面不是激活的，不执行它的回调函数
@@ -79,7 +82,9 @@ export default {
 
           // 所以这个地方还需要this.activatedFlag进行判断一次
           this.activatedFlag && this.myChart && this.myChart.resize()
-        })
+        }) */
+
+        window.addEventListener('resize', this.chartResize)
 
         // 注意这个地方不能使用window.onresize进行绑定事件,如果存在多个该图表组件,就只能绑定一个回调函数,
         // 后面的会覆盖掉前面的回调函数
@@ -111,6 +116,10 @@ export default {
       // 1.判断myChart实例是否存在
       this.myChart || (this.myChart = echarts.init(this.oBox))
       this.myChart.hideLoading()
+    },
+    // 图表重绘方法
+    chartResize() {
+      this.activatedFlag && this.myChart && this.myChart.resize()
     }
   },
   filters: {}
