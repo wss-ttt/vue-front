@@ -5,7 +5,8 @@
       <div class="col">年龄</div>
       <div class="col">性别</div>
     </div>
-    <swiper ref="mySwiper" :options="swiperOption">
+    <!-- v-if="list.length" 这个地方要加上这个代码否则不是从第一条数据开始显示的 -->
+    <swiper ref="mySwiper" :options="swiperOption" v-if="list.length">
       <swiper-slide class="item row" v-for="(item,index) in list" :key="index">
         <div class="col">{{item.name}}</div>
         <div class="col">{{item.age}}</div>
@@ -30,7 +31,11 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: {
+    mySwiper() {
+      return this.$refs['mySwiper'].$swiper
+    }
+  },
   watch: {},
   created() {},
   mounted() {
@@ -42,7 +47,17 @@ export default {
         sex: '男'
       })
     }
-  }
+  },
+  activated() {
+    // 进入的时候，重新开启swiper
+    this.mySwiper.autoplay.start()
+  },
+  deactivated() {
+    // 离开的时候，停止swiper
+    this.mySwiper.autoplay.stop()
+  },
+  updated() {},
+  destroyed() {}
 }
 </script>
 <style scoped lang="scss">
