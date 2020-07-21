@@ -26,7 +26,7 @@ export default {
         direction: 'vertical',
         slidesPerView: '5', //  显示区域显示几个
         autoplay: true,
-        loop: false // 注意这个loop的作用及到底做了哪些事情
+        loop: true // 注意这个loop的作用及到底做了哪些事情
       }
     }
   },
@@ -35,7 +35,7 @@ export default {
   created() {},
   mounted() {
     // 制造数据
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 10; i++) {
       this.list.push({
         name: 'aa' + i,
         age: 18,
