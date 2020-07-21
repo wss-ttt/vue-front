@@ -11,6 +11,11 @@ import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/a
 import { isAuth, timeFormat } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import $ from 'jquery'
+
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
+
 // 引入全局的scss
 import '@/assets/scss/global.scss'
 Vue.use(VueCookie)
