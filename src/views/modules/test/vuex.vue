@@ -1,32 +1,50 @@
 <template>
   <div class="wrapper">
-    {{ homePageName }}
+    {{name}}
+    <hr>
+    {{name2}}
+    <button type="button" @click="test">commit</button>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, version } from '@/assets/js/vuex.js'
+import Vue from 'vue'
 export default {
   components: {},
   props: {},
   data() {
-    return {}
+    return {
+    }
   },
   computed: {
+    // 混入进来
     ...mapState({
-      homePageName: state => state
-    })
+      name: function(state) {
+        return state.common.name
+      }
+    }),
+    name2() {
+      return this.$store.state.common.name
+    }
   },
   watch: {},
   created() {},
   mounted() {
-    console.log('aa', this.homePageName)
+    // console.log('vuex页面', this.$store)
+    console.log('vuex页面', this)
+    console.log('a', new Vue())
   },
   activated() {},
   deactivated() {},
   updated() {},
   destroyed() {},
-  methods: {},
+  methods: {
+    test() {
+      debugger
+      this.$store.commit('common/updateName', 'xxx')
+    }
+  },
   filters: {}
 }
 </script>
