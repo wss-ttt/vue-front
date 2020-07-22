@@ -17,7 +17,8 @@ export default {
     mainTabsActiveName: '',
     userRegion:{},   // 保存用户地区信息
     userRegionMap:{},   // 保存用户所在地的地图数据
-    homePageName:'index' // 保存首页的路由name
+    homePageName:'index',// 保存首页的路由name
+    name: '乔峰'
   },
   mutations: {
     updateDocumentClientHeight(state, height) {
@@ -50,5 +51,8 @@ export default {
     updateUserRegionMap(state, userRegionMap) {
       state.userRegionMap = userRegionMap 
     },
+    updateName(state, name) {
+      state.name = name
+    }
   }
 }
