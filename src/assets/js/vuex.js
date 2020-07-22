@@ -924,4 +924,15 @@
     createNamespacedHelpers: createNamespacedHelpers
   };
   
-export default index
+// export default index
+var version = '3.0.1'
+export {
+  Store,
+  install,
+  version,
+  mapState,
+  mapMutations,
+  mapGetters,
+  mapActions,
+  createNamespacedHelpers
+}
