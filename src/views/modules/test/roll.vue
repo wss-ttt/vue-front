@@ -16,7 +16,6 @@ export default {
     return {
       title: '湘西土家族苗族自治州站点监控信息',
       // title: '湘西土家族苗族自治',
-      innerDOM: null,
       timer: null,
       unitWidth: 0
     }
