@@ -15,7 +15,6 @@
     </swiper>
   </div>
 </template>
-
 <script>
 export default {
   components: {},
@@ -39,6 +38,8 @@ export default {
   watch: {},
   created() {},
   mounted() {
+    // console.log('swiper页面', this.$store)
+    console.log('swiper页面', this)
     // 制造数据
     for (let i = 1; i <= 10; i++) {
       this.list.push({
