@@ -14,8 +14,8 @@ export default {
   props: {},
   data () {
     return {
-      // title: '湘西土家族苗族自治州站点监控信息',
-      title: '湘西土家族苗族自治',
+      title: '湘西土家族苗族自治州站点监控信息',
+      // title: '湘西土家族苗族自治',
       innerDOM: null,
       timer: null,
       unitWidth: 0
@@ -47,7 +47,7 @@ export default {
   methods: {
     autoPlay () {
       if (this.$refs['inner'].offsetLeft === -this.unitWidth) {
-        this.innerDOM.style.left = 0
+        this.$refs['inner'].style.left = 0
       }
       this.$refs['inner'].style.left = this.$refs['inner'].offsetLeft - 1 + 'px'
     },
