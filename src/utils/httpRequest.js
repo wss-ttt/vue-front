@@ -4,7 +4,6 @@ import router from '@/router'
 import qs from 'qs'
 import merge from 'lodash/merge'
 import { clearLoginInfo } from '@/utils'
-import { Loading, Message } from 'element-ui'
 const http = axios.create({
   // timeout: 1000 * 60,
   withCredentials: true,

@@ -15,43 +15,43 @@ export default {
     // 主入口标签页
     mainTabs: [],
     mainTabsActiveName: '',
-    userRegion:{},   // 保存用户地区信息
-    userRegionMap:{},   // 保存用户所在地的地图数据
-    homePageName:'index',// 保存首页的路由name
+    userRegion: {},   // 保存用户地区信息
+    userRegionMap: {},   // 保存用户所在地的地图数据
+    homePageName: 'index', // 保存首页的路由name
     name: '乔峰'
   },
   mutations: {
-    updateDocumentClientHeight(state, height) {
+    updateDocumentClientHeight (state, height) {
       state.documentClientHeight = height
     },
-    updateNavbarLayoutType(state, type) {
+    updateNavbarLayoutType (state, type) {
       state.navbarLayoutType = type
     },
-    updateSidebarLayoutSkin(state, skin) {
+    updateSidebarLayoutSkin (state, skin) {
       state.sidebarLayoutSkin = skin
     },
-    updateSidebarFold(state, fold) {
+    updateSidebarFold (state, fold) {
       state.sidebarFold = fold
     },
-    updateMenuList(state, list) {
+    updateMenuList (state, list) {
       state.menuList = list
     },
-    updateMenuActiveName(state, name) {
+    updateMenuActiveName (state, name) {
       state.menuActiveName = name
     },
-    updateMainTabs(state, tabs) {
+    updateMainTabs (state, tabs) {
       state.mainTabs = tabs
     },
-    updateMainTabsActiveName(state, name) {
+    updateMainTabsActiveName (state, name) {
       state.mainTabsActiveName = name
     },
-    updateUserRegion(state, userRegion) {
+    updateUserRegion (state, userRegion) {
       state.userRegion = userRegion
     },
-    updateUserRegionMap(state, userRegionMap) {
-      state.userRegionMap = userRegionMap 
+    updateUserRegionMap (state, userRegionMap) {
+      state.userRegionMap = userRegionMap
     },
-    updateName(state, name) {
+    updateName (state, name) {
       state.name = name
     }
   }

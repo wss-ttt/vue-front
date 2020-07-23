@@ -10,7 +10,7 @@ import merge from 'lodash/merge'
 /**
  * 获取uuid
  */
-export function getUUID() {
+export function getUUID () {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
   })
@@ -20,7 +20,7 @@ export function getUUID() {
  * 是否有权限
  * @param {*} key
  */
-export function isAuth(key) {
+export function isAuth (key) {
   return JSON.parse(sessionStorage.getItem('permissions') || '[]').indexOf(key) !== -1 || false
 }
 
@@ -30,7 +30,7 @@ export function isAuth(key) {
  * @param {*} id
  * @param {*} pid
  */
-export function treeDataTranslate(data, id = 'id', pid = 'parentId') {
+export function treeDataTranslate (data, id = 'id', pid = 'parentId') {
   var res = []
   var temp = {}
   for (var i = 0; i < data.length; i++) {
@@ -56,7 +56,7 @@ export function treeDataTranslate(data, id = 'id', pid = 'parentId') {
 /**
  * 清除登录信息
  */
-export function clearLoginInfo() {
+export function clearLoginInfo () {
   Vue.cookie.delete('token')
   store.commit('resetStore')
   // 清空掉ssessionStorage中的数据
@@ -68,7 +68,7 @@ export function clearLoginInfo() {
  * 文件下载
  */
 
-export function excelDownload(data, fileName) {
+export function excelDownload (data, fileName) {
   if (!data) {
     return
   }
@@ -83,7 +83,7 @@ export function excelDownload(data, fileName) {
 /*
  	导出->excel
  * */
-export function exportDataToExcel(url, dataForm) {
+export function exportDataToExcel (url, dataForm) {
   return new Promise((resolve, reject) => {
     // loading
     const loading = Loading.service({
@@ -91,7 +91,7 @@ export function exportDataToExcel(url, dataForm) {
       text: 'Loading',
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
-    });
+    })
     request({
       url: request.adornUrl(url),
       method: 'post',
@@ -118,18 +118,17 @@ export function exportDataToExcel(url, dataForm) {
           resolve()
         })
       } else {
-        reject(data.msg);
+        reject(data.msg)
       }
       loading.close()
     })
   })
-
 }
 /**
  * 获取字典数据
  */
 
-export function getDictData(dictName) {
+export function getDictData (dictName) {
   return new Promise((resolve, reject) => {
     request({
       url: request.adornUrl('/sys/sysdictdata/list'),
@@ -148,10 +147,10 @@ export function getDictData(dictName) {
     })
   })
 }
-/* 
+/*
 	通过查询条件来获取数据列表
 */
-export function selectDataList(url, params) {
+export function selectDataList (url, params) {
   return new Promise((resolve, reject) => {
     request({
       url: request.adornUrl(url),
@@ -174,7 +173,7 @@ export function selectDataList(url, params) {
 /*
 	格式化 年月日
 */
-export function formatDate(date) {
+export function formatDate (date) {
   let t = new Date(date)
   let year = t.getFullYear()
   let month = t.getMonth() + 1
@@ -188,27 +187,27 @@ export function formatDate(date) {
   return year + '' + month + '' + day
 }
 
-/*时间格式化方法*/
+/* 时间格式化方法 */
 /**
  * @param {*} fmt  格式化的字符 eg:'yyyy-MM-dd' | 'yyyy-MM-dd hh-mm-ss'等
  */
-export function timeFormat(fmt) {
+export function timeFormat (fmt) {
   let o = {
-    "M+": this.getMonth() + 1, //月份 
-    "d+": this.getDate(), //日 
-    "h+": this.getHours(), //小时 
-    "m+": this.getMinutes(), //分 
-    "s+": this.getSeconds(), //秒 
-    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-    "S": this.getMilliseconds() //毫秒 
-  };
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    'M+': this.getMonth() + 1, // 月份
+    'd+': this.getDate(), // 日
+    'h+': this.getHours(), // 小时
+    'm+': this.getMinutes(), // 分
+    's+': this.getSeconds(), // 秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
+    'S': this.getMilliseconds() // 毫秒
   }
-  for (let k in o)
-    if (new RegExp("(" + k + ")").test(fmt))
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-  return fmt;
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
+  }
+  for (let k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) { fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length))) }
+  }
+  return fmt
 }
 
 /**
@@ -217,7 +216,7 @@ export function timeFormat(fmt) {
  * @param {boolean} immediate
  * @return {*}
  */
-export function debounce(func, wait, immediate) {
+export function debounce (func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
   const later = function () {
