@@ -19,7 +19,7 @@
 export default {
   components: {},
   props: {},
-  data() {
+  data () {
     return {
       list: [],
       swiperOption: {
@@ -31,13 +31,13 @@ export default {
     }
   },
   computed: {
-    mySwiper() {
+    mySwiper () {
       return this.$refs['mySwiper'].$swiper
     }
   },
   watch: {},
-  created() {},
-  mounted() {
+  created () {},
+  mounted () {
     // console.log('swiper页面', this.$store)
     console.log('swiper页面', this)
     // 制造数据
@@ -49,16 +49,16 @@ export default {
       })
     }
   },
-  activated() {
+  activated () {
     // 进入的时候，重新开启swiper
     this.mySwiper.autoplay.start()
   },
-  deactivated() {
+  deactivated () {
     // 离开的时候，停止swiper
     this.mySwiper.autoplay.stop()
   },
-  updated() {},
-  destroyed() {}
+  updated () {},
+  destroyed () {}
 }
 </script>
 <style scoped lang="scss">
