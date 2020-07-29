@@ -9,6 +9,14 @@
         >
           <span>{{ item.title }}</span>
         </div>
+        <!-- <div></div>
+        <div style="transform:rotate(45deg)"></div>
+        <div style="transform:rotate(90deg)"></div>
+        <div style="transform:rotate(135deg)"></div>
+        <div style="transform:rotate(180deg)"></div>
+        <div style="transform:rotate(225deg)"></div>
+        <div style="transform:rotate(270deg)"></div>
+        <div style="transform:rotate(315deg)"></div> -->
       </div>
       <div class="lottery-btn" @click="rotate">
         <i></i>
@@ -115,16 +123,17 @@ export default {
     position: relative;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
     background: url(../../../assets/img/bg_lottery_f.png) center no-repeat;
     > div {
       box-sizing: border-box;
       position: absolute;
       top: 0;
-      left: 32.7%;
       width: 214px;
       height: 50%;
       // border: 1px solid red;
-      transform-origin: 50% 100%;
+      transform-origin: center bottom;
       text-align: center;
       font-size: 30px;
       // color: #fff;
@@ -154,7 +163,7 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      // background: url(../../../assets/img/btn_lottery.png) center no-repeat;
+      background: url(../../../assets/img/btn_lottery.png) center no-repeat;
     }
   }
 }
