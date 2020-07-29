@@ -5,7 +5,7 @@
         <div
           v-for="(item, index) in list"
           :key="index"
-          :style="{'transform' : 'rotate('+ 360 / list.length * index + 'deg)'}"
+          :style="{'transform' : 'rotate('+ ((360 / list.length * index) + (360 / list.length / 2)) + 'deg)'}"
         >
           <span>{{ item.title }}</span>
         </div>
@@ -62,6 +62,7 @@ export default {
     this.$refs['boxLottery'].addEventListener('transitionend', () => {
       this.rollging = false
       this.$refs['boxLottery'].style.transform = 'rotate(' + this.randomAngle + 'deg)'
+      this.lotteryEnd(this.randomAngle)
     })
   },
   activated () {},
@@ -78,6 +79,25 @@ export default {
       this.randomAngle = Math.floor(Math.random() * 360)
       // 3.需要转的角度
       this.rotateAngle = this.randomAngle + this.roundNum * 360
+    },
+    lotteryEnd (angle) {
+      if (angle > 0 && angle < 45) {
+        console.log('888')
+      } else if (angle > 45 && angle <= 90) {
+        console.log('777')
+      } else if (angle > 90 && angle <= 135) {
+        console.log('666')
+      } else if (angle > 135 && angle <= 180) {
+        console.log('555')
+      } else if (angle > 180 && angle <= 225) {
+        console.log('444')
+      } else if (angle > 225 && angle <= 270) {
+        console.log('333')
+      } else if (angle > 270 && angle <= 315) {
+        console.log('222')
+      } else if (angle > 315 && angle <= 360) {
+        console.log('111')
+      }
     }
   },
   filters: {}
