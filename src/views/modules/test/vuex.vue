@@ -1,47 +1,35 @@
 <template>
   <div class="wrapper">
-    {{name}}
-    <hr>
-    {{name2}}
-    <hr>
-    {{name3}}
-    <button type="button" @click="test">commit</button>
+    {{msg}}<br>
+    {{msg2}}<br>
+    {{newMsg}}<br>
   </div>
 </template>
 
 <script>
-import { mapState } from '@/assets/js/vuex.js'
-import Vue from 'vue'
+import { mapState, mapGetters } from '@/assets/js/vuex.js'
+import store from '@/store/index'
 export default {
   components: {},
   props: {},
   data () {
     return {
+      msg: store.state.test.msg,
+      msg2: this.$store.state.test.msg
     }
   },
   computed: {
     // 混入进来
     ...mapState({
-      name: state => state.user.msg
+      msg: state => state.user.msg
     }),
-    name2 () {
-      return this.$store.state.user.msg
-    },
-    name3: {
-      get () {
-        return this.$store.state.user.msg
-      },
-      set (val) {
-        this.$store.commit('user/updateMsg', val)
-      }
-    }
+    ...mapGetters({
+      newMsg: 'test/newMsg'
+    })
   },
   watch: {},
   created () {},
   mounted () {
-    // console.log('vuex页面', this.$store)
-    console.log('vuex页面', this)
-    console.log('a', new Vue())
   },
   activated () {},
   deactivated () {},
@@ -49,7 +37,6 @@ export default {
   destroyed () {},
   methods: {
     test () {
-      this.name3 = '天天向上'
     }
   },
   filters: {}
