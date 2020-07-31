@@ -911,7 +911,6 @@ function install (_Vue) {
 }
 
 var mapState = normalizeNamespace(function (namespace, states) {
-  debugger
   var res = {}
   var res2 = normalizeMap(states)
   res2.forEach(function (ref) {

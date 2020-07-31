@@ -3,12 +3,14 @@
     {{name}}
     <hr>
     {{name2}}
+    <hr>
+    {{name3}}
     <button type="button" @click="test">commit</button>
   </div>
 </template>
 
 <script>
-import { mapState, version } from '@/assets/js/vuex.js'
+import { mapState } from '@/assets/js/vuex.js'
 import Vue from 'vue'
 export default {
   components: {},
@@ -20,12 +22,18 @@ export default {
   computed: {
     // 混入进来
     ...mapState({
-      name: function (state) {
-        return state.common.name
-      }
+      name: state => state.user.msg
     }),
     name2 () {
-      return this.$store.state.common.name
+      return this.$store.state.user.msg
+    },
+    name3: {
+      get () {
+        return this.$store.state.user.msg
+      },
+      set (val) {
+        this.$store.commit('user/updateMsg', val)
+      }
     }
   },
   watch: {},
@@ -41,8 +49,7 @@ export default {
   destroyed () {},
   methods: {
     test () {
-      debugger
-      this.$store.commit('common/updateName', 'xxx')
+      this.name3 = '天天向上'
     }
   },
   filters: {}
