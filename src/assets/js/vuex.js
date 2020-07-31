@@ -401,7 +401,6 @@ prototypeAccessors.state.set = function (v) {
 }
 
 Store.prototype.commit = function commit (_type, _payload, _options) {
-  debugger
   var this$1 = this
 
   // check object-style commit
