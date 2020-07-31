@@ -1,21 +1,17 @@
 <template>
   <div class="wrapper">
     {{msg}}<br>
-    {{msg2}}<br>
-    {{newMsg}}<br>
+    <button type="button" @click="test">确定</button>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from '@/assets/js/vuex.js'
-import store from '@/store/index'
+import { mapState, mapGetters, mapMutations, mapActions } from '@/assets/js/vuex.js'
 export default {
   components: {},
   props: {},
   data () {
     return {
-      msg: store.state.test.msg,
-      msg2: this.$store.state.test.msg
     }
   },
   computed: {
@@ -36,7 +32,21 @@ export default {
   updated () {},
   destroyed () {},
   methods: {
+    ...mapMutations({
+      updateMsg: 'test/updateMsg'
+    }),
+    ...mapActions({
+      updateMsg2: 'test/updateMsg2'
+    }),
     test () {
+      this.updateMsg()
+      // this.updateMsg2()
+      // console.log(this.$store)
+      // this.$store.dispatch('test/updateMsg2')
+
+      // this.$store.commit('test/updateMsg', '太难太难')
+
+      // this.$store.dispatch('test/updateMsg2', '太难太难')
     }
   },
   filters: {}
