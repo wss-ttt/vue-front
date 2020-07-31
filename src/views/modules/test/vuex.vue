@@ -13,34 +13,34 @@ import Vue from 'vue'
 export default {
   components: {},
   props: {},
-  data() {
+  data () {
     return {
     }
   },
   computed: {
     // 混入进来
     ...mapState({
-      name: function(state) {
+      name: function (state) {
         return state.common.name
       }
     }),
-    name2() {
+    name2 () {
       return this.$store.state.common.name
     }
   },
   watch: {},
-  created() {},
-  mounted() {
+  created () {},
+  mounted () {
     // console.log('vuex页面', this.$store)
     console.log('vuex页面', this)
     console.log('a', new Vue())
   },
-  activated() {},
-  deactivated() {},
-  updated() {},
-  destroyed() {},
+  activated () {},
+  deactivated () {},
+  updated () {},
+  destroyed () {},
   methods: {
-    test() {
+    test () {
       debugger
       this.$store.commit('common/updateName', 'xxx')
     }
