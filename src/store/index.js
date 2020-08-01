@@ -5,6 +5,7 @@ import common from './modules/common'
 import user from './modules/user'
 import electric from './modules/electric'
 import test from './modules/test'
+import student from './modules/student'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
     common,
     user,
     electric,
-    test
+    test,
+    student
   },
   mutations: {
     // 重置vuex本地储存状态
