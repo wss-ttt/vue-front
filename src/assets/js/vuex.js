@@ -996,6 +996,16 @@ var mapGetters = normalizeNamespace(function (namespace, getters) {
 
 var mapActions = normalizeNamespace(function (namespace, actions) {
   var res = {}
+  // 遍历操作
+  // normalizeMap方法处理之后,数据格式如下:
+  /**
+   *  [{
+   *    key: 'name', 
+   *    val: 'name' || fn
+   * }, {
+   *    ... 
+   * }] 
+   * **/
   normalizeMap(actions).forEach(function (ref) {
     var key = ref.key
     var val = ref.val
