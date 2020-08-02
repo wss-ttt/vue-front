@@ -5,7 +5,8 @@
  * 1. 代码中路由统一使用name属性跳转(不使用path属性)
  */
 import Vue from 'vue'
-import Router from 'vue-router'
+// import Router from 'vue-router'
+import Router from '@/assets/js/vue-router.js'  // 为了调试vue-router.js
 import http from '@/utils/httpRequest'
 import store from '@/store'
 import { isURL } from '@/utils/validate'
@@ -50,7 +51,7 @@ const mainRoutes = {
     next()
   }
 }
-
+// debugger
 const router = new Router({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
@@ -60,6 +61,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log('beforeEach')
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
