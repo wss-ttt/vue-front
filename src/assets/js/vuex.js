@@ -339,7 +339,7 @@ var Store = function Store (options) {
     state = state() || {}
   }
 
-  // store internal state
+  // store internal state => 内部状态(私有属性)
   this._committing = false
   this._actions = Object.create(null)
   this._actionSubscribers = []
@@ -347,7 +347,7 @@ var Store = function Store (options) {
   this._wrappedGetters = Object.create(null)
   this._modules = new ModuleCollection(options)
   this._modulesNamespaceMap = Object.create(null)
-  this._subscribers = []
+  this._subscribers = [] // 这个是干什么用的
   this._watcherVM = new Vue()
 
   // bind commit and dispatch to self
