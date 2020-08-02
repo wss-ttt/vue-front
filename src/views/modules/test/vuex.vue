@@ -2,6 +2,10 @@
   <div class="wrapper">
     {{msg}}<br>
     <button type="button" @click="test">确定</button>
+    <br>
+    {{ name }}
+    <br>
+    <button type="button" @click="change">改变</button>
   </div>
 </template>
 
@@ -21,11 +25,17 @@ export default {
     }),
     ...mapGetters({
       newMsg: 'test/newMsg'
-    })
+    }),
+    name() {
+      return '哈哈'
+    }
   },
   watch: {},
   created () {},
   mounted () {
+    console.log('getters', this.$store.getters) // 可以取到所有modules的getters
+    console.log('state', this.$store.state) // 可以取到所有modules的state
+    console.log('_mutation', this.$store._mutations)
   },
   activated () {},
   deactivated () {},
@@ -47,6 +57,10 @@ export default {
       // this.$store.commit('test/updateMsg', '太难太难')
 
       // this.$store.dispatch('test/updateMsg2', '太难太难')
+    },
+    change() {
+      // this.$store.commit('test/updateMsg', '今天天气很热')
+      this.$store.dispatch('test/updateMsg2', '今天天气很热')
     }
   },
   filters: {}
