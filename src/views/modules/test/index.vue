@@ -1,8 +1,12 @@
 <template>
   <div class="wrapper">
-    <input type="text" v-model="num" />
-    <button type="button" @click="test">确定</button>
-    <button type="button" @click="change">改变</button>
+    <div class="container">
+      <div class="item" v-for="(item ,index) in list" :key="index">
+        {{ item.name }}
+        <span class="btn" :class="{'active': item.status}" @click="change(item)"></span>
+      </div>
+      <hr />
+    </div>
   </div>
 </template>
 
@@ -12,68 +16,75 @@ export default {
   props: {},
   data () {
     return {
-      num: 0,
-      sell: {
-        small: 10,
-        big: 20
-      }
+      list: [],
+      arr: []
     }
   },
-  computed: {
-    // 计算属性返回一个函数
-    sellNum () {
-      return (o) => {
-        return o.small + o.big
-      }
-    }
-  },
+  computed: {},
   watch: {},
   created () {},
-  mounted () {},
+  mounted () {
+    for (let i = 0; i < 30; i++) {
+      this.list.push({
+        id: i,
+        status: false,
+        name: i
+      })
+    }
+  },
   activated () {},
   deactivated () {},
   updated () {},
   destroyed () {},
   methods: {
-    test () {
-      console.log('销量', this.sellNum(this.sell))
-    },
-    isNumber (num) {
-      // isNaN()函数 把空串 空格 以及null 按照0来处理 所以先去除，
-      if (num === '' || num == null) {
-        return false
-      }
-      if ((typeof num === 'number' || typeof num === 'string') && !isNaN(num)) {
-        return true
-      } else {
-        return false
-      }
-    },
-    _isNumber (num) {
-      if (parseFloat(num).toString() === 'NaN') {
-        return false
-      } else {
-        return true
-      }
-    },
-    // 判断是否为一个整数
-    isInteger (num) {
-      const val = parseInt(num)
-      if (num == val) {
-        return true
-      } else {
-        return false
-      }
-    },
-    _isInteger (num) {
-      return (typeof num === 'string' || typeof num === 'number') && num % 1 === 0
-    },
-    change () {
-      this.sell.small = 100
+    change (item) {
+      item.status = !item.status
+      this.arr.push(item)
+      console.log(this.arr)
     }
   },
   filters: {}
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
+.container {
+  > .item {
+    width: 200px;
+    height: 150px;
+    background: #ccc;
+    float: left;
+    margin: 5px;
+    position: relative;
+    > .btn {
+      cursor: pointer;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border: 1px solid #eee;
+      &.active {
+        // border: 1px solid #1acd7e;
+        &::before {
+          content: '';
+          top: 3px;
+          left: 3px;
+          position: absolute;
+          background: transparent;
+          border: black solid 3px;
+          border-top: none;
+          border-right: none;
+          height: 6px;
+          width: 8px;
+          -moz-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+          -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+          color: #fff;
+        }
+      }
+    }
+  }
+}
 </style>
