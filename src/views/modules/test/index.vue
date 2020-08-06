@@ -1,12 +1,30 @@
 <template>
   <div class="wrapper">
-    <div class="container">
-      <div class="item" v-for="(item ,index) in list" :key="index">
-        {{ item.name }}
-        <span class="btn" :class="{'active': item.status}" @click="change(item)"></span>
-      </div>
-      <hr />
-    </div>
+    <el-menu
+      :default-active="activeIndex"
+      mode="horizontal"
+      text-color="#fff"
+      active-text-color="red"
+      background-color="#006f69"
+      router
+    >
+      <el-menu-item index="test-vuex">处理中心</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="/test-roll">选项1</el-menu-item>
+        <el-menu-item index="/test-ani">选项2</el-menu-item>
+        <el-menu-item index="2-3">选项3</el-menu-item>
+        <el-submenu index="2-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="2-4-1">选项1</el-menu-item>
+          <el-menu-item index="2-4-2">选项2</el-menu-item>
+          <el-menu-item index="2-4-3">选项3</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+      <el-menu-item index="4">
+        <a href="#">订单管理</a>
+      </el-menu-item>
+    </el-menu>
   </div>
 </template>
 
@@ -16,75 +34,20 @@ export default {
   props: {},
   data () {
     return {
-      list: [],
-      arr: []
+      activeIndex: '1'
     }
   },
   computed: {},
   watch: {},
   created () {},
-  mounted () {
-    for (let i = 0; i < 30; i++) {
-      this.list.push({
-        id: i,
-        status: false,
-        name: i
-      })
-    }
-  },
+  mounted () {},
   activated () {},
   deactivated () {},
   updated () {},
   destroyed () {},
-  methods: {
-    change (item) {
-      item.status = !item.status
-      this.arr.push(item)
-      console.log(this.arr)
-    }
-  },
+  methods: {},
   filters: {}
 }
 </script>
-<style scoped lang="scss">
-.container {
-  > .item {
-    width: 200px;
-    height: 150px;
-    background: #ccc;
-    float: left;
-    margin: 5px;
-    position: relative;
-    > .btn {
-      cursor: pointer;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      border: 1px solid #eee;
-      &.active {
-        // border: 1px solid #1acd7e;
-        &::before {
-          content: '';
-          top: 3px;
-          left: 3px;
-          position: absolute;
-          background: transparent;
-          border: black solid 3px;
-          border-top: none;
-          border-right: none;
-          height: 6px;
-          width: 8px;
-          -moz-transform: rotate(-45deg);
-          -ms-transform: rotate(-45deg);
-          -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-          color: #fff;
-        }
-      }
-    }
-  }
-}
+<style scoped>
 </style>
