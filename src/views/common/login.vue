@@ -1,7 +1,7 @@
 <template>
   <div class="bg">
     <div class="login">
-      <div class="title">计量异常分析系统</div>
+      <div class="title">后台管理系统</div>
       <div class="main-content">
         <form>
           <div class="f-item logo">
@@ -53,7 +53,7 @@
 import { getUUID } from '@/utils'
 import { Decrypt, Encrypt } from '@/utils/crypto.js'
 export default {
-  data() {
+  data () {
     return {
       dataForm: {
         userName: 'admin',
@@ -64,18 +64,18 @@ export default {
       errorTips: '', // 后台返回的错误提示小时
       captchaPath: '',
       loading: true,
-      devVersion:'',   // 开发版本号
-      prodVersion:'',   // 产品版本号
+      devVersion: '',   // 开发版本号
+      prodVersion: ''   // 产品版本号
     }
   },
-  created() {
+  created () {
     this.getCaptcha()
-    this.getVersion().then((data)=>{
+    this.getVersion().then((data) => {
       this.devVersion = data.devVersion
       this.prodVersion = data.prodVersion
     })
   },
-  mounted() {
+  mounted () {
     // this.getUserIP();
     this.resize()
     // 监听窗口大小改变事件
@@ -84,16 +84,16 @@ export default {
     }
   },
   computed: {
-    isValid() {
-      return this.errorTips ? false : true
+    isValid () {
+      return !this.errorTips
     },
-    homePageName(){
-        return this.$store.state.common.homePageName
+    homePageName () {
+      return this.$store.state.common.homePageName
     }
   },
   methods: {
     // 提交表单
-    dataFormSubmit() {
+    dataFormSubmit () {
       // 用户名非空校验
       if (this.dataForm.userName === '') {
         this.errorTips = '用户名不能为空'
@@ -126,7 +126,7 @@ export default {
             let industryList = []
             this.errorTips = ''
             this.$cookie.set('token', data.token)
-            
+
             this.$router.replace({
               // name: 'home'
               name: this.homePageName
@@ -141,13 +141,13 @@ export default {
       }
     },
     // 获取验证码
-    getCaptcha() {
+    getCaptcha () {
       this.dataForm.uuid = getUUID()
       this.captchaPath = this.$http.adornUrl(
         `/captcha.jpg?uuid=${this.dataForm.uuid}`
       )
     },
-    resize() {
+    resize () {
       var wH = window.innerHeight // 当前窗口的高度
       var wW = window.innerWidth // 当前窗口的宽度
       // 表示1920的设计图,使用100PX的默认值
@@ -155,14 +155,14 @@ export default {
       if (wW > 1200) {
         var rem = wW * whdef // 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
         var html = document.documentElement
-        html.style.fontSize = rem + 'px' //适用于PC网站
+        html.style.fontSize = rem + 'px' // 适用于PC网站
       } else {
         var rem = 1200 * whdef
         var html = document.documentElement
         html.style.fontSize = rem + 'px'
       }
     },
-    checkInput(type) {
+    checkInput (type) {
       if (type === 'userName') {
         if (this.dataForm.userName === '') {
           this.errorTips = '用户名不能为空'
@@ -185,12 +185,12 @@ export default {
         this.errorTips = ''
       }
     },
-    getVersion(){
-      return new Promise((resolve,reject)=>{
+    getVersion () {
+      return new Promise((resolve, reject) => {
         this.$http({
-          url:this.$http.adornUrl('/versions'),
-          method:'get'
-        }).then(({data})=>{
+          url: this.$http.adornUrl('/versions'),
+          method: 'get'
+        }).then(({data}) => {
           resolve(data)
         })
       })
