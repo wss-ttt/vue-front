@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 有子级 -->
     <el-submenu
       v-if="menu.list && menu.list.length >= 1"
       :index="menu.menuId + ''"
@@ -16,6 +17,7 @@
         :dynamicMenuRoutes="dynamicMenuRoutes"
       ></sub-menu>
     </el-submenu>
+    <!-- 没有子级的 -->
     <el-menu-item
       v-else
       :index="menu.menuId + ''"
@@ -47,14 +49,14 @@ export default {
   },
   computed: {
     sidebarLayoutSkin: {
-      get() {
+      get () {
         return this.$store.state.common.sidebarLayoutSkin
       }
     }
   },
   methods: {
     // 通过menuId与动态(菜单)路由进行匹配跳转至指定路由
-    gotoRouteHandle(menu) {
+    gotoRouteHandle (menu) {
       var route = this.dynamicMenuRoutes.filter(
         item => item.meta.menuId === menu.menuId
       )
